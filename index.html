@@ -47,7 +47,8 @@
       <div class="md:hidden">
         <button id="menu-btn" class="text-white focus:outline-none">
           <!-- Default Hamburger Icon -->
-          <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
@@ -285,9 +286,11 @@
     const menuBtn = document.getElementById("menu-btn");
     const menuIcon = document.getElementById("menu-icon");
     const mobileMenu = document.getElementById("mobile-menu");
+    const navLinks = document.querySelectorAll("#mobile-menu a"); // Select all nav links
 
     let menuOpen = false;
 
+    // Toggle menu on button click
     menuBtn.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
       menuOpen = !menuOpen;
@@ -296,6 +299,17 @@
       menuIcon.innerHTML = menuOpen
         ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>` // X (close) icon
         : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`; // Hamburger icon
+    });
+
+    // Hide menu on nav link click
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuOpen = false;
+
+        // Reset to hamburger icon
+        menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`;
+      });
     });
   </script>
 </body>
